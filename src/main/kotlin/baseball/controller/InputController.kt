@@ -6,24 +6,14 @@ import baseball.view.InputView
 
 class InputController {
     fun getBaseBallNumber(): Int {
-        try {
-            val number = InputView().readBaseBallNumber()
-            Player(number)
-            return number.toInt()
-        } catch (e: IllegalArgumentException) {
-            println(e.message)
-            return getBaseBallNumber()
-        }
+        val number = InputView().readBaseBallNumber()
+        Player(number)
+        return number.toInt()
     }
 
     fun getCommandNumber(): Int {
-        try {
-            val number = InputView().readGameCommand()
-            Command(number)
-            return number.toInt()
-        } catch (e: IllegalArgumentException) {
-            println(e.message)
-            return getCommandNumber()
-        }
+        val number = InputView().readGameCommand()
+        Command(number)
+        return number.toInt()
     }
 }

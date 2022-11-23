@@ -21,4 +21,12 @@ class PlayerTest {
             Player(number)
         }
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["122", "233", "455"])
+    fun `중복되는 숫자가 있는 경우 테스트`(number: String) {
+        assertThrows<IllegalArgumentException> {
+            Player(number)
+        }
+    }
 }

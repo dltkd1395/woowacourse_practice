@@ -6,6 +6,7 @@ class Player(private val number: String) {
     init {
         require(isNumberRange()) { ErrorType.BASEBALL_NUMBER_RANGE.errorMessage }
         require(isNumberSize()) { ErrorType.BASEBALL_NUMBER_SIZE.errorMessage }
+        require(isNumberDuplication()) { ErrorType.BASEBALL_NUMBER_DUPLICATION.errorMessage }
     }
 
     private fun isNumberRange(): Boolean {
@@ -19,4 +20,7 @@ class Player(private val number: String) {
 
     private fun isNumberSize(): Boolean =
         number.length == THREE
+
+    private fun isNumberDuplication(): Boolean =
+        number.length == number.toList().distinct().size
 }

@@ -13,4 +13,12 @@ class PlayerTest {
             Player(number)
         }
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1", "1234", "12"])
+    fun `3자리가 아닌 경우 테스트`(number: String) {
+        assertThrows<IllegalArgumentException> {
+            Player(number)
+        }
+    }
 }

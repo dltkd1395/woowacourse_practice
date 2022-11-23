@@ -1,5 +1,6 @@
 package baseball
 
+import baseball.domain.Command
 import baseball.domain.Player
 import baseball.util.ErrorType
 import org.junit.jupiter.api.Test
@@ -36,6 +37,15 @@ class PlayerTest {
     fun `값을 입력하지 않은 경우 테스트`() {
         assertThrows<IllegalArgumentException> {
             Player("")
+        }
+    }
+
+
+    @ParameterizedTest
+    @ValueSource(strings = ["a", "!", "A"])
+    fun `숫자가 아닌 경우 테스트`(number: String) {
+        assertThrows<IllegalArgumentException> {
+            Player(number)
         }
     }
 }

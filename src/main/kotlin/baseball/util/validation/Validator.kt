@@ -16,8 +16,10 @@ class Validator(private val inputValue: String) {
     fun isLetter(): Boolean {
         val letter = "^[0-9]$"
         val pattern = Pattern.compile(letter)
-        if (!pattern.matcher(inputValue).find()) {
-            return false
+        inputValue.map { number ->
+            if (!pattern.matcher(number.toString()).find()) {
+                return false
+            }
         }
         return true
     }

@@ -1,6 +1,8 @@
 package baseball
 
 import baseball.domain.Player
+import baseball.util.ErrorType
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
@@ -27,6 +29,13 @@ class PlayerTest {
     fun `중복되는 숫자가 있는 경우 테스트`(number: String) {
         assertThrows<IllegalArgumentException> {
             Player(number)
+        }
+    }
+
+    @Test
+    fun `값을 입력하지 않은 경우 테스트`() {
+        assertThrows<IllegalArgumentException> {
+            Player("")
         }
     }
 }

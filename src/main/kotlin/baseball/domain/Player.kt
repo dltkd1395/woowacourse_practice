@@ -1,9 +1,11 @@
 package baseball.domain
 
 import baseball.util.*
+import baseball.util.validation.Validator
 
 class Player(private val number: String) {
     init {
+        Validator(number)
         require(isNumberRange()) { ErrorType.BASEBALL_NUMBER_RANGE.errorMessage }
         require(isNumberSize()) { ErrorType.BASEBALL_NUMBER_SIZE.errorMessage }
         require(isNumberDuplication()) { ErrorType.BASEBALL_NUMBER_DUPLICATION.errorMessage }

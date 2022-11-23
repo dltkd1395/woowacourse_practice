@@ -13,4 +13,12 @@ class CommandTest {
             Command(number)
         }
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["22", "33", "44"])
+    fun `1글자가 아닌 경우 테스트`(number: String) {
+        assertThrows<IllegalArgumentException> {
+            Command(number)
+        }
+    }
 }

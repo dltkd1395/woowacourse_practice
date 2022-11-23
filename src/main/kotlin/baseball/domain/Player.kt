@@ -8,8 +8,14 @@ class Player(private val number: String) {
         require(isNumberSize()) { ErrorType.BASEBALL_NUMBER_SIZE.errorMessage }
     }
 
-    private fun isNumberRange(): Boolean =
-        number.toInt() in ONE until TEN
+    private fun isNumberRange(): Boolean {
+        number.map { num ->
+            if (num.digitToInt() !in ONE until TEN) {
+                return false
+            }
+        }
+        return true
+    }
 
     private fun isNumberSize(): Boolean =
         number.length == THREE

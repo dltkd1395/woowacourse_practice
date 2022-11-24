@@ -13,3 +13,6 @@ const val ERROR_MONEY_AMOUNT = "1000원 이상이여야 합니다."
 const val ERROR_MONEY_DIVIDE = "1000원 단위로 나누어 떨어져야 합니다."
 
 const val ERROR_BONUS_NUMBER = "로또 번호와 중복된 숫자가 없어야 합니다."
+
+const val ERROR_EMPTY = "값을 입력해야 합니다."
+const val ERROR_NUMBER = "숫자를 입력해야 합니다."

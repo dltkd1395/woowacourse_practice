@@ -27,4 +27,5 @@ const val FIFTH_PRZE = 5_000
 const val OUTPUT_LOTTO_COUNT = "개를 구매했습니다."
 const val OUTPUT_STATISTICS = "당첨 통계\n---"
 const val OUTPUT_MATCHING_RESULT = "%d개 일치 (%s원) - %d개"
-const val OUTPUT_PROFIT_RESULT = "총 수익률은 %s%입니다."
+const val OUTPUT_PROFIT_RESULT = "총 수익률은 %s"
+const val OUTPUT_PROFIT = "%입니다."

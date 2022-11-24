@@ -1,10 +1,7 @@
 package lotto.view
 
 import lotto.domain.*
-import lotto.utils.OUTPUT_LOTTO_COUNT
-import lotto.utils.OUTPUT_MATCHING_RESULT
-import lotto.utils.OUTPUT_PROFIT_RESULT
-import lotto.utils.OUTPUT_STATISTICS
+import lotto.utils.*
 
 class OutputView {
 
@@ -22,7 +19,7 @@ class OutputView {
 
     fun printProfitResult(prizeResult: PrizeResult, money: Int) {
         val profit = Profit(prizeResult.amount, money).calculate()
-        println(OUTPUT_PROFIT_RESULT.format())
+        println(OUTPUT_PROFIT_RESULT.format(profit) + OUTPUT_PROFIT)
     }
 
     private fun printMatchingStatistics(prizeResult: PrizeResult) {

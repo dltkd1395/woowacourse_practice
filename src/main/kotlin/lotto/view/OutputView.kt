@@ -23,19 +23,20 @@ class OutputView {
     }
 
     private fun printMatchingStatistics(prizeResult: PrizeResult) {
-        val prizeValue = Prize.values().filter { prize -> prize != Prize.NO_WINNING_AMOUNT }
+        val prizeValue =
+            Prize.values().filter { prize -> prize != Prize.NO_WINNING_AMOUNT }.reversed()
         prizeValue.forEach { prize ->
             printStatisticsResult(prize, prizeResult)
         }
     }
 
     private fun printStatisticsResult(prize: Prize, prizeResult: PrizeResult) {
-        println(
-            OUTPUT_MATCHING_RESULT.format(
-                prize.matchedCount,
-                MoneyUnit(prize.amount).divideUnit(),
-                prizeResult.fifthPrizeCount
-            )
-        )
+        val unit = MoneyUnit(prize.amount).divideUnit()
+        val count = prizeResult.getCount(prize.matchedCount, prize.isBonusMathing)
+        print(OUTPUT_MATCHING_RESULT.format(prize.matchedCount))
+        if (prize.matchedCount == FIVE && prize.isBonusMathing) {
+            print(OUTPUT_MATCHING_BONUS)
+        }
+        println(OUTPUT_MONEY_COUNT.format(unit, count))
     }
 }

@@ -26,7 +26,7 @@ class OutputView {
     }
 
     private fun printMatchingStatistics(prizeResult: PrizeResult) {
-        val prizeValue = Prize.values()
+        val prizeValue = Prize.values().filter { prize -> prize != Prize.NO_WINNING_AMOUNT }
         prizeValue.forEach { prize ->
             printStatisticsResult(prize, prizeResult)
         }

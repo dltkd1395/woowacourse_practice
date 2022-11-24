@@ -7,7 +7,7 @@ import lotto.utils.LOTTO_MIN_NUMBER
 object Validator {
 
     fun validateEmpty(inputValue: String) {
-        requireNotNull(inputValue.isNotEmpty() || inputValue.equals("")) {
+        require(inputValue.isNotEmpty() || !inputValue.equals("")) {
             ErrorType.EMPTY.errorMessage
         }
     }

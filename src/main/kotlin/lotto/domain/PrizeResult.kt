@@ -19,4 +19,15 @@ data class PrizeResult(
             matchedCount == THREE -> fifthPrizeCount++
         }
     }
+
+    fun getCount(matchedCount: Int, isMatchingBonus: Boolean): Int {
+        when {
+            matchedCount == SIX -> return firstPrizeCount
+            matchedCount == FIVE && isMatchingBonus -> return secondPrizeCount
+            matchedCount == FIVE && !isMatchingBonus -> return thirdPrizeCount
+            matchedCount == FOUR -> return fourthPrizeCount
+            matchedCount == THREE -> return fifthPrizeCount
+        }
+        return ZERO
+    }
 }

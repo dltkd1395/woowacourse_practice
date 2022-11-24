@@ -9,3 +9,4 @@ const val ERROR_LOTTO_DUPLICATION = "중복되는 숫자가 없어야 합니다.
 const val ERROR_LOTTO_NUMBER_RANGE = "1부터 45까지의 숫자여야 합니다."
 
 const val ERROR_MONEY_AMOUNT = "1000원 이상이여야 합니다."
+const val ERROR_MONEY_DIVIDE = "1000원 단위로 나누어 떨어져야 합니다."

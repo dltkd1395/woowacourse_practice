@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.utils.ZERO
+import lotto.utils.*
 
 data class PrizeResult(
     var amount: Int = ZERO,
@@ -9,4 +9,14 @@ data class PrizeResult(
     var thirdPrizeCount: Int = ZERO,
     var fourthPrizeCount: Int = ZERO,
     var fifthPrizeCount: Int = ZERO
-)
+) {
+    fun setCount(matchedCount: Int, isMatchingBonus: Boolean) {
+        when {
+            matchedCount == SIX -> firstPrizeCount++
+            matchedCount == FIVE && isMatchingBonus -> secondPrizeCount++
+            matchedCount == FIVE && !isMatchingBonus -> thirdPrizeCount++
+            matchedCount == FOUR -> fourthPrizeCount++
+            matchedCount == THREE -> fifthPrizeCount++
+        }
+    }
+}

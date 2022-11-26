@@ -29,4 +29,12 @@ class CommandTest {
             Command(type)
         }
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["3", "4", "5"])
+    fun `재시작 여부 명령어가 숫자인 경우 에러가 발생한다`(type: String) {
+        assertThrows<IllegalArgumentException> {
+            Command(type)
+        }
+    }
 }

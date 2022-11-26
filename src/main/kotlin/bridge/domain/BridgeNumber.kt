@@ -7,6 +7,7 @@ import bridge.uilts.ZERO
 
 class BridgeNumber(private val number: String) {
     init {
+        isNotNumber()
         require(isPositiveNumber()) { ErrorType.POSITIVE_NUMBER.errorMessage }
         require(isNumberRange()) { ErrorType.NUMBER_RANGE.errorMessage }
     }
@@ -16,4 +17,13 @@ class BridgeNumber(private val number: String) {
 
     private fun isNumberRange(): Boolean =
         number.toInt() in MIN_SIZE..MAX_SIZE
+
+    private fun isNotNumber() {
+        try {
+            number.toInt()
+        } catch (e: NumberFormatException) {
+            throw IllegalArgumentException("${ErrorType.NOT_NUMBER.errorMessage}")
+        }
+    }
+
 }

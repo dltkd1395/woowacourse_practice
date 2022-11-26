@@ -22,4 +22,12 @@ class BridgeNumberTest {
             BridgeNumber(number)
         }
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["a", "A", "BB", "1@"])
+    fun `다리길이가 문자인 경우 에러가 발생한다`(expected: String) {
+        assertThrows<IllegalArgumentException> {
+            BridgeNumber(expected)
+        }
+    }
 }

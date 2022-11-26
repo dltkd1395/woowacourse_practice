@@ -31,6 +31,10 @@ class BridgeGame {
         bridge.resetBridge()
     }
 
+    fun quit(player: Player) {
+        player.setQuit()
+    }
+
     private fun setBridgeResult(playerDirection: String, result: String, bridge: Bridge) {
         when (playerDirection) {
             UP -> setUpBridge(result, bridge)

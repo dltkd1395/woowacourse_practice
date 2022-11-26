@@ -13,3 +13,5 @@ const val ERROR_NOT_NUMBER = "숫자를 입력해야합니다."
 const val ERROR_DIRECTION_COMMAND = "U 또는 D이여야 합니다."
 
 const val ERROR_RETRY_COMMAND = "R 또는 Q여야 합니다."
+
+const val ERROR_EMPTY = "값을 입력해야 합니다."

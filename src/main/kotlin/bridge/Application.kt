@@ -1,5 +1,13 @@
 package bridge
 
+import bridge.controller.BridgeController
+import bridge.controller.InputController
+import bridge.domain.*
+import bridge.uilts.*
+import camp.nextstep.edu.missionutils.Console
+import org.mockito.invocation.InvocationContainer
+
 fun main() {
-    // TODO: 프로그램 구현
+    BridgeController().run()
 }
+

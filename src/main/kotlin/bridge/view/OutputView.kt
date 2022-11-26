@@ -11,6 +11,7 @@ class OutputView {
 
     fun printGameStart() {
         println(OUTPUT_GAME_START)
+        println()
     }
 
     fun printGameSuccess(player: Player) {
@@ -41,9 +42,10 @@ class OutputView {
      *
      * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
-    fun printResult(bridge: Bridge) {
+    fun printResult(bridge: Bridge, player: Player) {
         println(OUTPUT_GAME_RESULT)
         printMap(bridge)
-        println()
+        printGameSuccess(player)
+        printGameRetry(player)
     }
 }

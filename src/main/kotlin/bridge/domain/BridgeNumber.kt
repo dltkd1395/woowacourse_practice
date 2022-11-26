@@ -5,15 +5,15 @@ import bridge.uilts.MAX_SIZE
 import bridge.uilts.MIN_SIZE
 import bridge.uilts.ZERO
 
-class BridgeNumber(private val number: Int) {
+class BridgeNumber(private val number: String) {
     init {
         require(isPositiveNumber()) { ErrorType.POSITIVE_NUMBER.errorMessage }
         require(isNumberRange()) { ErrorType.NUMBER_RANGE.errorMessage }
     }
 
     private fun isPositiveNumber(): Boolean =
-        number >= ZERO
+        number.toInt() >= ZERO
 
     private fun isNumberRange(): Boolean =
-        number in MIN_SIZE..MAX_SIZE
+        number.toInt() in MIN_SIZE..MAX_SIZE
 }

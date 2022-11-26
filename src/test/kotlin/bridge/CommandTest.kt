@@ -21,4 +21,12 @@ class CommandTest {
             Command("")
         }
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["d", "r", "q"])
+    fun `재시작 여부 명령어가 소문자인 경우 에러가 발생한다`(type: String) {
+        assertThrows<IllegalArgumentException> {
+            Command(type)
+        }
+    }
 }

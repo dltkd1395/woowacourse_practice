@@ -21,4 +21,12 @@ class MovementTest {
             Movement("")
         }
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["u", "d", "q"])
+    fun `이동 방향은 소문자인 경우 에러가 발생한다`(direction: String) {
+        assertThrows<IllegalArgumentException> {
+            Movement(direction)
+        }
+    }
 }

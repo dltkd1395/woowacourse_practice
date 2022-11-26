@@ -1,10 +1,12 @@
 package bridge.uilts.vaildator
 
+import bridge.uilts.COMMAND_LENGTH
 import bridge.uilts.ErrorType
 
 class CommandVaildator(private val command: String) {
     init {
         require(isEmpty()) { ErrorType.EMPTY.errorMessage }
+        require(isLength()) { ErrorType.COMMAND_LENGTH.errorMessage }
         isLetter()
         isUpperCase()
     }
@@ -23,4 +25,7 @@ class CommandVaildator(private val command: String) {
             require(char.isLetter()) { ErrorType.LETTER.errorMessage }
         }
     }
+
+    private fun isLength(): Boolean =
+        command.length == COMMAND_LENGTH
 }

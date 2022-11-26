@@ -1,6 +1,7 @@
 package bridge.uilts
 
 const val ZERO = 0
+const val COMMAND_LENGTH = 1
 
 const val MIN_SIZE = 3
 const val MAX_SIZE = 20

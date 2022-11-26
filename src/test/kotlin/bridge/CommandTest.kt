@@ -37,4 +37,12 @@ class CommandTest {
             Command(type)
         }
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["QQ", "RR"])
+    fun `재시작 여부 명령어가 1글자가 아닌 경우 에러가 발생한다`(type: String) {
+        assertThrows<IllegalArgumentException> {
+            Command(type)
+        }
+    }
 }

@@ -8,5 +8,6 @@ enum class ErrorType(val errorMessage: String) {
     RETRY_COMMAND(ERROR.format(COMMAND + ERROR_RETRY_COMMAND)),
     EMPTY(ERROR.format(ERROR_EMPTY)),
     UPPER(ERROR.format(ERROR_UPPERCASE)),
-    LETTER(ERROR.format(ERROR_LETTER))
+    LETTER(ERROR.format(ERROR_LETTER)),
+    COMMAND_LENGTH(ERROR.format(ERROR_LENGTH))
 }

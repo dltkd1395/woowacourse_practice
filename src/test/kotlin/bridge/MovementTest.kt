@@ -37,4 +37,12 @@ class MovementTest {
             Movement(direction)
         }
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["QQ", "RR"])
+    fun `이동 방향이 1글자가 아닌 경우 에러가 발생한다`(direction: String) {
+        assertThrows<IllegalArgumentException> {
+            Movement(direction)
+        }
+    }
 }

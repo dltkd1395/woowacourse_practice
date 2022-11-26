@@ -18,6 +18,8 @@ const val QUIT = "Q"
 const val SUCCESS = "O"
 const val FAILURE = "X"
 
-const val INPUT_BRIDGE_SIZE = "이동할 칸을 선택해주세요."
-const val INPUT_BRIDGE_MOVEMENT = "이동할 칸을 선택해주세요."
-const val INPUT_BRIDGE_RETRY = "게임을 다시 시도할지 여부를 입력해주세요"
+const val NOT_CROSS = " "
+
+const val INPUT_BRIDGE_SIZE = "다리의 길이를 입력해주세요."
+const val INPUT_BRIDGE_MOVEMENT = "이동할 칸을 선택해주세요. (위: U, 아래: D)"
+const val INPUT_BRIDGE_RETRY = "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)"

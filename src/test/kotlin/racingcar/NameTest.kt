@@ -13,4 +13,12 @@ class NameTest {
             Name(value)
         }
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["이!@", "noA!!", "1@%"])
+    fun `자동차 이름이 특수문자를 쓰인 경우 예외가 발생한다`(value: String) {
+        assertThrows<IllegalArgumentException> {
+            Name(value)
+        }
+    }
 }

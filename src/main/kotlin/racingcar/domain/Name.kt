@@ -4,7 +4,7 @@ import racingcar.utils.ErrorType
 import racingcar.utils.MAX_NAME_RANGE
 import java.util.regex.Pattern
 
-class Name(private val value: String) {
+data class Name(val value: String) {
     init {
         require(isNumberRange()) { ErrorType.NAME_RANGE.errorMessage }
         require(isSpecialCharacter()) { ErrorType.NAME_PATTERN.errorMessage }

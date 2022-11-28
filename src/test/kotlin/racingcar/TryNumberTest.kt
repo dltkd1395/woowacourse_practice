@@ -1,5 +1,7 @@
 package racingcar
 
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
@@ -20,5 +22,12 @@ class TryNumberTest {
         assertThrows<IllegalArgumentException> {
             TryNumber(value)
         }
+    }
+
+    @Test
+    fun `게임을 종료한다`() {
+        val tryNumber = TryNumber(1)
+        tryNumber.decrease()
+        assertThat(tryNumber.isGameOver()).isTrue()
     }
 }

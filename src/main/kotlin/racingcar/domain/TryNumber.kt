@@ -14,6 +14,12 @@ data class TryNumber(private var value: Int) {
         require(isPositiveNumber()) { ErrorType.TRY_POSITIVE_NUMBER.errorMessage }
     }
 
+    fun decrease(): Int =
+        this.value--
+
+    fun isGameOver(): Boolean =
+        this.value <= ZERO
+
     private fun isPositiveNumber(): Boolean =
         value > ZERO
 }

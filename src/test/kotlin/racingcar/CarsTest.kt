@@ -20,7 +20,7 @@ class CarsTest {
 
     @Test
     fun `자동차들이 움직인다`() {
-        val judgement = Judgement((0..9).random(), 0)
+        val judgement = Judgement((0..9), 0)
         val cars = listOf(Car("poni"), Car("wooni"))
         val movingCar = Cars(cars, judgement).move()
         movingCar.cars.map { car ->

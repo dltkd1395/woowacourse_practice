@@ -12,7 +12,7 @@ class CarTest {
         val name = "poni"
         val position = 0
         val car = Car(name, position)
-        val random = Judgement((0..9).random(), 0)
+        val random = Judgement((0..9), 0)
         val carDistance = car.moveForwod(random)
         assertThat(carDistance.isSamePosition(Position(1))).isTrue()
     }

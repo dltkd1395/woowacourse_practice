@@ -27,4 +27,14 @@ class CarsTest {
             assertThat(car.isSamePosition(Position(1))).isTrue()
         }
     }
+
+    @Test
+    fun `우승자를 선정한다`() {
+        val cars = Cars(listOf(Car("poni", 2), Car("wooni", 2), Car("jun", 1)))
+        val actual = listOf("poni", "wooni")
+        val expected = cars.findWinners().map { car ->
+            car.name.value
+        }
+        assertThat(actual).isEqualTo(expected)
+    }
 }

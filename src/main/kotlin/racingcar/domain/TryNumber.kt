@@ -5,6 +5,11 @@ import racingcar.utils.ZERO
 
 data class TryNumber(private var value: Int) {
 
+    constructor(input: String) : this(
+        input.toIntOrNull()
+            ?: throw IllegalArgumentException("${ErrorType.TRY_NOT_NUMBER.errorMessage}")
+    )
+
     init {
         require(isPositiveNumber()) { ErrorType.TRY_POSITIVE_NUMBER.errorMessage }
     }

@@ -6,9 +6,9 @@ import racingcar.utils.THRESHOLD
 
 
 class Judgement(
-    private val randomNumber: Int = (MIN_RANDOM_NUMBER..MAX_RANDOM_NUMBER).random(),
+    private val randomNumber: IntRange = (MIN_RANDOM_NUMBER..MAX_RANDOM_NUMBER),
     private val threshold: Int = THRESHOLD
 ): Movement {
     override fun isMovable(): Boolean =
-        randomNumber >= threshold
+        randomNumber.random() >= threshold
 }

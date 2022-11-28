@@ -13,7 +13,7 @@ class CarTest {
         val position = 0
         val car = Car(name, position)
         val random = Judgement((0..9).random(), 0)
-        val carDistance = car.move(random)
+        val carDistance = car.moveForwod(random)
         assertThat(carDistance.isSamePosition(Position(1))).isTrue()
     }
 }

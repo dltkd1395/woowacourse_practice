@@ -5,7 +5,7 @@ import racingcar.utils.MIN_RANDOM_NUMBER
 import racingcar.utils.THRESHOLD
 
 
-class RandomNumber(
+class Judgement(
     private val randomNumber: Int = (MIN_RANDOM_NUMBER..MAX_RANDOM_NUMBER).random(),
     private val threshold: Int = THRESHOLD
 ): Movement {

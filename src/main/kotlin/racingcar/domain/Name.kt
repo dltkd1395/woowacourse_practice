@@ -6,6 +6,7 @@ import java.util.regex.Pattern
 
 data class Name(val value: String) {
     init {
+        require(isBlank()) { ErrorType.NAME_BLANK.errorMessage }
         require(isNumberRange()) { ErrorType.NAME_RANGE.errorMessage }
         require(isSpecialCharacter()) { ErrorType.NAME_PATTERN.errorMessage }
     }
@@ -20,4 +21,7 @@ data class Name(val value: String) {
         }
         return true
     }
+
+    private fun isBlank(): Boolean =
+        value.isNotBlank()
 }

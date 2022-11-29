@@ -1,9 +1,21 @@
 package baseball.domain
 
-class Judgement {
-    fun isStrike(player: Int, computer: Int): Boolean =
-        player == computer
+class Judgement : PlayBall {
+    override fun getStrike(
+        playerNumbers: List<BaseBallNumber>,
+        computerNumbers: List<BaseBallNumber>
+    ): Int =
+        playerNumbers.zip(computerNumbers)
+            .filter { (player, computer) ->
+                player.value == computer.value
+            }.size
 
-    fun isBall(player: Int, computer: List<Int>): Boolean =
-        computer.contains(player)
+    override fun getBall(
+        playerNumbers: List<BaseBallNumber>,
+        computerNumbers: List<BaseBallNumber>
+    ): Int =
+        playerNumbers.zip(computerNumbers)
+            .filter { (player, computer) ->
+                player.value != computer.value && computerNumbers.contains(player)
+            }.size
 }

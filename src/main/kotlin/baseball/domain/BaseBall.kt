@@ -1,18 +1,18 @@
 package baseball.domain
 
+import baseball.util.THREE
 import baseball.util.ZERO
 
 data class BaseBall(
-    var strike: Int = ZERO,
-    var ball: Int = ZERO,
-    var isRetry: Boolean = true
+    val strike: Int = ZERO,
+    val ball: Int = ZERO,
 ) {
-    fun setQuit() {
-        isRetry = false
-    }
+    fun play(strike: Int, ball: Int): BaseBall =
+        BaseBall(strike, ball)
 
-    fun resetBaseBall() {
-        strike = ZERO
-        ball = ZERO
-    }
+    fun reset(): BaseBall =
+        BaseBall(ZERO, ZERO)
+
+    fun retry(): Boolean =
+        strike != THREE
 }

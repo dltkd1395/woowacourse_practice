@@ -1,58 +1,41 @@
 package baseball.controller
 
-import baseball.domain.BaseBall
-import baseball.domain.BaseBallNumberGenerator
-import baseball.domain.Judgement
+import baseball.domain.*
 import baseball.util.ONE
 import baseball.util.THREE
 import baseball.util.TWO
 import baseball.view.OutputView
 
 class BaseBallController {
+    private var baseBall = BaseBall()
+    private val inputController = InputController()
+    private val outputView = OutputView()
+    private var command: Command = Command()
+    private val judgement = Judgement()
+
     fun start() {
         outputView.printGameStart()
-        while (baseBall.isRetry) {
-            val computerNumber = BaseBallNumberGenerator().generate()
-            play(computerNumber)
-            val command = inputController.getCommandNumber()
-            isQuit(command)
+        while (!command.isGameOver()) {
+            baseBall = baseBall.reset()
+            play()
+            command = Command(inputController.getCommandNumber())
         }
     }
 
-    private fun play(computerNumber: List<Int>) {
-        while (baseBall.strike != THREE) {
-            baseBall.resetBaseBall()
-            val playerNumber =
-                inputController.getBaseBallNumber().toString().toList().map { it.digitToInt() }
-            countBaseBall(playerNumber, computerNumber)
-            outputView.printBaseBall(baseBall.strike, baseBall.ball)
+    private fun play() {
+        val computerNumbers = BaseBallNumberGenerator().generate()
+        while (baseBall.retry()) {
+            throwBall(computerNumbers)
         }
         outputView.printResult()
     }
 
-    private fun countBaseBall(playerNumber: List<Int>, computerNumber: List<Int>) {
-        baseBall = counterController.getResult(playerNumber, computerNumber)
-    }
-
-    private fun isQuit(command: Int) {
-        when (command) {
-            ONE -> retry()
-            TWO -> quit()
-        }
-    }
-
-    private fun retry() {
-        baseBall.resetBaseBall()
-    }
-
-    private fun quit() {
-        baseBall.setQuit()
-    }
-
-    companion object {
-        private var baseBall = BaseBall()
-        private val inputController = InputController()
-        private val outputView = OutputView()
-        private val counterController = CounterController()
+    private fun throwBall(computerNumbers: List<BaseBallNumber>) {
+        val playerNumbers = inputController.getBaseBallNumber()
+        baseBall = baseBall.play(
+            judgement.getStrike(playerNumbers, computerNumbers),
+            judgement.getBall(playerNumbers, computerNumbers)
+        )
+        outputView.printBaseBall(baseBall.strike, baseBall.ball)
     }
 }

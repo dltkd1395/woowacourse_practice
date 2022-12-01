@@ -6,15 +6,23 @@ import lotto.utils.THOUSAND
 import lotto.utils.ZERO
 
 
-class Money(private val number: Int) {
+data class Money(val value: Int) {
+
+    constructor(input: String) : this(
+        input.toIntOrNull() ?: throw IllegalArgumentException("${ErrorType.NUMBER.errorMessage}")
+    )
+
     init {
         require(isAmount()) { ErrorType.MONEY_AMOUNT.errorMessage }
         require(isDivide()) { ErrorType.MONEY_DIVIDE.errorMessage }
     }
 
+    fun divideUnit(): String =
+       "%,2d".format(this.value)
+
     private fun isAmount(): Boolean =
-        number >= THOUSAND
+        this.value >= THOUSAND
 
     private fun isDivide(): Boolean =
-        number / THOUSAND >= ONE && number % THOUSAND == ZERO
+        this.value / THOUSAND >= ONE && this.value % THOUSAND == ZERO
 }

@@ -3,40 +3,38 @@ package lotto.view
 import lotto.domain.*
 import lotto.utils.*
 
-class OutputView {
+object OutputView {
 
-    fun printLottos(lottos: List<List<Int>>) {
+    fun printLottos(lottos: List<Lotto>) {
         println("${lottos.size}" + OUTPUT_LOTTO_COUNT)
         lottos.forEach { lotto ->
-            println(lotto)
+            println(lotto.toList().map { number ->
+                number.value
+            })
         }
     }
 
-    fun printTotalStatistics(prizeResult: PrizeResult) {
+    fun printStatistics(lottos: LottoResult) {
         println(OUTPUT_STATISTICS)
-        printMatchingStatistics(prizeResult)
-    }
-
-    fun printProfitResult(prizeResult: PrizeResult, money: Int) {
-        val profit = Profit(prizeResult.amount, money).calculate()
-        println(OUTPUT_PROFIT_RESULT.format(profit) + OUTPUT_PROFIT)
-    }
-
-    private fun printMatchingStatistics(prizeResult: PrizeResult) {
-        val prizeValue =
-            Prize.values().filter { prize -> prize != Prize.NO_WINNING_AMOUNT }.reversed()
-        prizeValue.forEach { prize ->
-            printStatisticsResult(prize, prizeResult)
+        Prize.values().filter { it != Prize.NO_WINNING_AMOUNT }.forEach { prize ->
+            print(OUTPUT_MATCHING_RESULT.format(prize.matchedCount))
+            print(isPrintMatchingBonus(prize))
+            printMatching(lottos, prize)
         }
+        println(OUTPUT_PROFIT_RESULT.format(lottos.profitRate) + OUTPUT_PROFIT)
     }
 
-    private fun printStatisticsResult(prize: Prize, prizeResult: PrizeResult) {
-        val unit = MoneyUnit(prize.amount).divideUnit()
-        val count = prizeResult.getCount(prize.matchedCount, prize.isBonusMathing)
-        print(OUTPUT_MATCHING_RESULT.format(prize.matchedCount))
-        if (prize.matchedCount == FIVE && prize.isBonusMathing) {
-            print(OUTPUT_MATCHING_BONUS)
+    private fun printMatching(lottos: LottoResult, prize: Prize) {
+        val money =  Money(prize.amount).divideUnit()
+        val count =  lottos.lottoPrize.count { it.matchedCount == prize.matchedCount
+                && it.isMatchingBonus == prize.isMatchingBonus }
+        println(OUTPUT_MONEY_COUNT.format(money, count))
+    }
+
+    private fun isPrintMatchingBonus(prize: Prize): String {
+        if (prize.isMatchingBonus) {
+            return OUTPUT_MATCHING_BONUS
         }
-        println(OUTPUT_MONEY_COUNT.format(unit, count))
+        return ""
     }
 }

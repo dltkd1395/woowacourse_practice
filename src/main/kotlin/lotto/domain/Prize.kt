@@ -5,7 +5,7 @@ import lotto.utils.*
 enum class Prize(
     val matchedCount: Int,
     val amount: Int,
-    val isBonusMathing: Boolean = false
+    val isMatchingBonus: Boolean = false
 ) {
     FIRST(SIX, FIRST_PRIZE),
     SECOND(FIVE, SECOND_PRIZE, true),
@@ -14,19 +14,22 @@ enum class Prize(
     FIFTH(THREE, FIFTH_PRZE),
     NO_WINNING_AMOUNT(ZERO, ZERO);
 
-    private fun isCorrectMatching(count: Int, isMatching: Boolean): Boolean =
-        count == FIVE && isMatching
-
-    private fun isMatchingLottoNumber(count: Int, isMatchingBonus: Boolean): Boolean =
-        isCorrectMatching(count, isMatchingBonus) == isBonusMathing
-
     companion object {
-        fun of(count: Int, isBonusMatching: Boolean): Prize {
-            return values()
-                .firstOrNull { prize ->
-                    prize.matchedCount == count &&
-                            prize.isMatchingLottoNumber(count, isBonusMatching)
-                } ?: NO_WINNING_AMOUNT
+        fun of(matchResult: MatchResult): Prize {
+            return when(matchResult.matchedCount) {
+                SIX -> FIRST
+                FIVE -> isMatching(matchResult.isMatchable)
+                FOUR -> FOURTH
+                THREE -> FIFTH
+                else -> NO_WINNING_AMOUNT
+            }
+        }
+
+        private fun isMatching(isBonusMatching: Boolean): Prize {
+            if (isBonusMatching) {
+                return SECOND
+            }
+            return THIRD
         }
     }
 }

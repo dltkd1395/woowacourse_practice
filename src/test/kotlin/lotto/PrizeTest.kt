@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.domain.Prize
+import lotto.domain.MatchResult
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -20,7 +21,8 @@ class PrizeTest {
         isMaching: Boolean,
         winningAmount: Int
     ) {
-        val result = Prize.of(matchedCount, isMaching).amount
+        val matchResult = MatchResult(matchedCount, isMaching)
+        val result = Prize.of(matchResult).amount
         assertThat(result).isEqualTo(winningAmount)
     }
 }

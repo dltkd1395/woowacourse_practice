@@ -1,13 +1,20 @@
 package lotto.domain
 
-import lotto.utils.ZERO
+import lotto.utils.TEN
 
 data class LottoResult(
-    var matchedCount: Int = ZERO,
-    var isBonusMatching: Boolean = false
+    val lottoPrize: List<Prize>,
+    val profitRate: String
 ) {
-    fun resetLottoResult() {
-        matchedCount = ZERO
-        isBonusMatching = false
+    companion object {
+        fun of(lottos: List<Lotto>, winningLotto: WinningLotto): LottoResult {
+            val prize = lottos.map { lotto -> lotto.matchs(winningLotto) }
+                .map { result -> Prize.of(result) }
+            val rate = String.format(
+                "%,.1f",
+                prize.sumOf { it.amount }.toFloat() / (lottos.size * TEN)
+            )
+            return LottoResult(prize, rate)
+        }
     }
 }

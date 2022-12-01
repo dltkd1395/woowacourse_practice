@@ -10,7 +10,7 @@ data class Lotto(private val numbers: List<LottoNumber>) {
     }
 
     fun isMatchingBonus(bonus: LottoNumber): Boolean =
-        numbers.contains(bonus)
+        !numbers.contains(bonus)
 
     fun matchs(winningLotto: WinningLotto): MatchResult =
         MatchResult(
@@ -19,6 +19,8 @@ data class Lotto(private val numbers: List<LottoNumber>) {
             },
             isMatchingBonus(winningLotto.bonus)
         )
+
+    fun toList() = numbers.toList()
 
     private fun match(lotto: LottoNumber): Boolean =
         numbers.contains(lotto)

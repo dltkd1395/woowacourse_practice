@@ -1,21 +1,28 @@
 package lotto.domain
 
 import lotto.utils.ErrorType
-import lotto.utils.validations.Validator
 
-class Lotto(private val numbers: List<Int>) {
+data class Lotto(private val numbers: List<LottoNumber>) {
+
     init {
         require(numbers.size == 6) { ErrorType.LOTTO_SIZE.errorMessage }
         require(isDuplication()) { ErrorType.LOTTO_DUPLICATION.errorMessage }
-        isNumberRange()
     }
+
+    fun isMatchingBonus(bonus: LottoNumber): Boolean =
+        numbers.contains(bonus)
+
+    fun matchs(winningLotto: WinningLotto): MatchResult =
+        MatchResult(
+            numbers.count { number ->
+                winningLotto.lotto.match(number)
+            },
+            isMatchingBonus(winningLotto.bonus)
+        )
+
+    private fun match(lotto: LottoNumber): Boolean =
+        numbers.contains(lotto)
 
     private fun isDuplication(): Boolean =
         numbers.size == numbers.distinct().size
-
-    private fun isNumberRange() {
-        numbers.map { number ->
-            Validator.validateNumberRange(number)
-        }
-    }
 }

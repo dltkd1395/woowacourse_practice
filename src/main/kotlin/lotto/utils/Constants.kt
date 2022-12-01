@@ -3,7 +3,7 @@ package lotto.utils
 const val LOTTO_MIN_NUMBER = 1
 const val LOTTO_MAX_NUMBER = 45
 
-const val HUNDRED = 100
+const val TEN = 10
 const val THOUSAND = 1000
 
 const val ZERO = 0
@@ -12,6 +12,7 @@ const val THREE = 3
 const val FOUR = 4
 const val FIVE = 5
 const val SIX = 6
+
 const val MAX_LENGTH = 6
 
 const val INPUT_LOTTO_AMOUNT = "구입금액을 입력해 주세요."

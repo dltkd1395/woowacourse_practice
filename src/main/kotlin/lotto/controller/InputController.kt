@@ -1,54 +1,36 @@
 package lotto.controller
 
-import lotto.domain.Bonus
-import lotto.domain.Lotto
-import lotto.domain.Money
-import lotto.utils.validations.Validator
+import lotto.domain.*
 import lotto.view.InputView
-import net.bytebuddy.asm.Advice.OffsetMapping.Factory.Illegal
 
 class InputController {
-    private val inputView = InputView()
-
-    fun getInputAmount(): Int {
+    fun getMoneyAmount(): Money {
         try {
-            val amount = inputView.readLottoAmount().toInt()
-            Money(amount)
-            return amount
+            val money = Money(InputView.readLottoAmount())
+            return money
         } catch (e: IllegalArgumentException) {
             println(e.message)
-            return getInputAmount()
+            return getMoneyAmount()
         }
     }
 
-    fun getInputWinningNumbers(): List<Int> {
+    fun getWinningLotto(): Lotto {
         try {
-            val winningNumbers = splitNumbers(inputView.readWinningNumber())
-            Lotto(winningNumbers)
-            return winningNumbers
+            val winningLotto = Lotto(InputView.readWinningNumber().map { LottoNumber(it) })
+            return winningLotto
         } catch (e: IllegalArgumentException) {
             println(e.message)
-            return getInputWinningNumbers()
+            return getWinningLotto()
         }
     }
 
-    fun getInputBonusNumber(lottoNumbers: List<Int>): Int {
+    fun getBounusNumber(): LottoNumber {
         try {
-            val number = inputView.readBonusNumber().toInt()
-            Bonus(lottoNumbers, number)
-            return number
+            val bonus = LottoNumber(InputView.readBonusNumber())
+            return bonus
         } catch (e: IllegalArgumentException) {
             println(e.message)
-            return getInputBonusNumber(lottoNumbers)
+            return getBounusNumber()
         }
     }
-
-    private fun splitNumbers(winningNumbers: String): List<Int> =
-        winningNumbers
-            .split(",")
-            .map { number ->
-                number.toInt()
-            }
-
-
 }

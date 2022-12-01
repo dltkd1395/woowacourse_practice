@@ -4,53 +4,21 @@ import lotto.domain.*
 import lotto.view.OutputView
 
 class LottoGameController {
+
     private val inputController = InputController()
-    private val outputView = OutputView()
-    private val prizeResult = PrizeResult()
-    private val lottoResult = LottoResult()
 
-    fun start() {
-        val money = inputController.getInputAmount()
-        println()
-        val lottos = LottoGenerator(money).generate()
-        play(lottos, money)
+    fun run() {
+        val money = inputController.getMoneyAmount()
+        val lottos = LottoStore().buy(money)
+        OutputView.printLottos(lottos)
+        play(lottos)
     }
 
-    private fun play(lottos: List<List<Int>>, money: Int) {
-        outputView.printLottos(lottos)
-        val winningNumbers = inputController.getInputWinningNumbers()
-        val bonusNumber = inputController.getInputBonusNumber(winningNumbers)
-        compareLottoNumbers(lottos, winningNumbers, bonusNumber)
-        outputView.printTotalStatistics(prizeResult)
-        outputView.printProfitResult(prizeResult, money)
-    }
-
-    private fun compareLottoNumbers(
-        lottos: List<List<Int>>,
-        winningNumbers: List<Int>,
-        bonusNumber: Int
-    ) {
-        lottos.forEach { lotto ->
-            lotto.map { number ->
-                judgeLottoNumber(number, winningNumbers, bonusNumber)
-            }
-            setResult()
-        }
-    }
-
-    private fun judgeLottoNumber(lottoNumber: Int, winningNumbers: List<Int>, bonusNumber: Int) {
-        if (Judgement(lottoNumber, winningNumbers).isLottoMatching()) {
-            lottoResult.matchedCount++
-            lottoResult.isBonusMatching = lottoNumber == bonusNumber
-        }
-    }
-
-    private fun setResult() {
-        prizeResult.setCount(lottoResult.matchedCount, lottoResult.isBonusMatching)
-        prizeResult.amount += Prize.of(
-            lottoResult.matchedCount,
-            lottoResult.isBonusMatching
-        ).amount
-        lottoResult.resetLottoResult()
+    private fun play(lottos: List<Lotto>) {
+        val winningNumbers = inputController.getWinningLotto()
+        val bonus = inputController.getBounusNumber()
+        val winningLotto = WinningLotto(winningNumbers, bonus)
+        val lottoResult = LottoResult.of(lottos, winningLotto)
+        OutputView.printStatistics(lottoResult)
     }
 }

@@ -6,14 +6,17 @@ import lotto.utils.LOTTO_MIN_NUMBER
 import lotto.utils.MAX_LENGTH
 import lotto.utils.THOUSAND
 
-class LottoGenerator(private val money: Int) {
-    fun generate(): List<List<Int>> {
-        val lottos = mutableListOf<List<Int>>()
-        val count = money / THOUSAND
-        while (lottos.size < count) {
-            val randomNumbers = Randoms.pickUniqueNumbersInRange(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER, MAX_LENGTH)
-            lottos.add(randomNumbers)
+class LottoGenerator {
+
+    fun create(count: Int): List<Lotto> =
+        List(count) {
+            generate()
         }
-        return lottos
-    }
+
+    fun generate(): Lotto =
+        Lotto(
+            Randoms.pickUniqueNumbersInRange(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER, MAX_LENGTH)
+                .sorted()
+                .map { number -> LottoNumber(number) }
+        )
 }

@@ -1,16 +1,15 @@
 package bridge.domain
 
-import bridge.BridgeMaker
-import bridge.BridgeRandomNumberGenerator
-import bridge.uilts.DOWN
-import bridge.uilts.ErrorType
-import bridge.uilts.UP
-import bridge.uilts.vaildator.CommandVaildator
+import bridge.MOVEMENT
+import bridge.utils.CommandVaildator
+import bridge.utils.DOWN
+import bridge.utils.ErrorType
+import bridge.utils.UP
 
-data class Movement(val command: String) {
+data class Direction(val command: String) {
     init {
-        CommandVaildator(command)
-        require(isCorrectDriection()) { ErrorType.DIRECTION.errorMessage }
+        CommandVaildator(MOVEMENT, command)
+        require(isCorrectDriection()) { ErrorType.DRIECTION.errorMessage }
     }
 
     private fun isCorrectDriection(): Boolean =

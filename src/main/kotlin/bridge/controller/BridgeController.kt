@@ -1,60 +1,45 @@
 package bridge.controller
 
-import bridge.*
-import bridge.domain.Bridge
-import bridge.domain.BridgeGame
-import bridge.domain.Judgement
-import bridge.domain.Player
-import bridge.uilts.FAILURE
-import bridge.uilts.QUIT
-import bridge.uilts.RETRY
+import bridge.BridgeMaker
+import bridge.BridgeRandomNumberGenerator
+import bridge.domain.*
+import bridge.utils.MOVING_FAILURE
 import bridge.view.OutputView
 
 class BridgeController {
-    private val inputController = InputController()
-    private val outputView = OutputView()
-    private val player = Player()
-    private val bridge = Bridge()
-    private val bridgeGame = BridgeGame()
-
-    fun run() {
-        outputView.printGameStart()
-        val size = inputController.getBridgeSize()
-        val createdBridge = BridgeMaker(BridgeRandomNumberGenerator()).makeBridge(size)
-        while (player.isRetry && bridge.size < createdBridge.size) {
-            play(createdBridge)
-        }
-        outputView.printResult(bridge, player)
+    fun start() {
+        OutputView.printGameStart()
+        val size = InputController().getBridgeSize()
+        val createdBridge = BridgeMaker(BridgeRandomNumberGenerator()).makeBridge(size.value).map { Direction(it) }
+        move(size, createdBridge)
     }
 
-    private fun play(createdBridge: List<String>) {
-        val playerDirection = inputController.getBridgeMoving()
-        val result = Judgement(createdBridge[bridge.size], playerDirection).compareDirection()
-        bridgeGame.move(playerDirection, result, bridge)
-        outputView.printMap(bridge)
-        failBridge(result)
-    }
-
-    private fun failBridge(result: String) {
-        if (result == FAILURE) {
-            val command = inputController.getBridgeCommand()
-            setGameState(command)
+    private fun move(size: BridgeNumber, createdBridge: List<Direction>) {
+        while (player.isGameOver) {
+            val direction = InputController().getDirection()
+            val result = BridgeGame().move(bridge, direction, createdBridge)
+            OutputView.printMap(bridge)
+            retry(result)
+            quit(size)
         }
     }
 
-    private fun setGameState(command: String) {
-        when (command) {
-            QUIT -> quit()
-            RETRY -> retry()
+    private fun retry(result: String) {
+        if (result == MOVING_FAILURE) {
+            val command = InputController().getCommand()
+            BridgeGame().retry(command, player, bridge)
         }
     }
 
-    private fun retry() {
-        bridgeGame.retry(player, bridge)
+    private fun quit(size: BridgeNumber) {
+        if (bridge.size == size.value || !player.isGameOver) {
+            player.setGameQuit()
+            OutputView.printResult(player, bridge, BridgeGame().isSuccess(player))
+        }
     }
 
-    private fun quit() {
-        bridgeGame.quit(player)
-        player.setGameState()
+    companion object {
+        private val bridge = Bridge()
+        private val player = Player()
     }
 }

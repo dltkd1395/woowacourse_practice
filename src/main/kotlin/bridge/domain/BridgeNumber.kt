@@ -1,29 +1,22 @@
 package bridge.domain
 
-import bridge.uilts.ErrorType
-import bridge.uilts.MAX_SIZE
-import bridge.uilts.MIN_SIZE
-import bridge.uilts.ZERO
+import bridge.BRIDGE
+import bridge.ERROR
+import bridge.utils.ErrorType
+import bridge.utils.MAX_LENGTH
+import bridge.utils.MIN_LENGTH
 
-class BridgeNumber(private val number: String) {
+class BridgeNumber(val value: Int) {
+
+    constructor(input: String) : this(
+        input.toIntOrNull()
+            ?: throw IllegalArgumentException("${ErrorType.NUMBER.errorMessage}")
+    )
+
     init {
-        isNotNumber()
-        require(isPositiveNumber()) { ErrorType.POSITIVE_NUMBER.errorMessage }
-        require(isNumberRange()) { ErrorType.NUMBER_RANGE.errorMessage }
+        require(isNumberRange()) { ERROR.format(BRIDGE + ErrorType.RANGE.errorMessage) }
     }
-
-    private fun isPositiveNumber(): Boolean =
-        number.toInt() >= ZERO
 
     private fun isNumberRange(): Boolean =
-        number.toInt() in MIN_SIZE..MAX_SIZE
-
-    private fun isNotNumber() {
-        try {
-            number.toInt()
-        } catch (e: NumberFormatException) {
-            throw IllegalArgumentException("${ErrorType.NOT_NUMBER.errorMessage}")
-        }
-    }
-
+        value in MIN_LENGTH..MAX_LENGTH
 }

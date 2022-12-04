@@ -1,14 +1,14 @@
 package bridge.view
 
-import bridge.uilts.INPUT_BRIDGE_MOVEMENT
-import bridge.uilts.INPUT_BRIDGE_RETRY
-import bridge.uilts.INPUT_BRIDGE_SIZE
+import bridge.utils.INPUT_BRIDGE_MOVEMENT
+import bridge.utils.INPUT_BRIDGE_RETRY
+import bridge.utils.INPUT_BRIDGE_SIZE
 import camp.nextstep.edu.missionutils.Console
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
-class InputView {
+object InputView {
     /**
      * 다리의 길이를 입력받는다.
      */

@@ -2,42 +2,37 @@ package bridge.controller
 
 import bridge.domain.BridgeNumber
 import bridge.domain.Command
-import bridge.domain.Movement
+import bridge.domain.Direction
 import bridge.view.InputView
 
 class InputController {
-    private val inputView = InputView()
-
-    fun getBridgeSize(): Int {
+    fun getBridgeSize(): BridgeNumber {
         try {
-            val size = inputView.readBridgeSize()
-            BridgeNumber(size)
-            return size.toInt()
+            val size = BridgeNumber(InputView.readBridgeSize())
+            return size
         } catch (e: IllegalArgumentException) {
             println(e.message)
             return getBridgeSize()
         }
     }
 
-    fun getBridgeMoving(): String {
+    fun getDirection(): Direction {
         try {
-            val direction = inputView.readMoving()
-            Movement(direction)
+            val direction = Direction(InputView.readMoving())
             return direction
         } catch (e: IllegalArgumentException) {
             println(e.message)
-            return getBridgeMoving()
+            return getDirection()
         }
     }
 
-    fun getBridgeCommand(): String {
+    fun getCommand(): Command {
         try {
-            val command = inputView.readGameCommand()
-            Command(command)
+            val command = Command(InputView.readGameCommand())
             return command
         } catch (e: IllegalArgumentException) {
             println(e.message)
-            return getBridgeCommand()
+            return getCommand()
         }
     }
 }

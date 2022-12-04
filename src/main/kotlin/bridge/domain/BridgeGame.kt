@@ -1,9 +1,6 @@
 package bridge.domain
 
-import bridge.uilts.DOWN
-import bridge.uilts.NOT_CROSS
-import bridge.uilts.UP
-import bridge.uilts.ZERO
+import bridge.utils.*
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -15,9 +12,11 @@ class BridgeGame {
      *
      * 이동을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
-    fun move(direction: String, result: String, bridge: Bridge) {
-        setBridgeResult(direction, result, bridge)
-        bridge.size++
+    fun move(bridge: Bridge, direction: Direction, bridgeMaker: List<Direction>): String {
+        val result = Judgement().compareDirection(direction, bridgeMaker[bridge.size])
+        moveBridge(bridge, direction, result)
+        bridge.setBridgeSize()
+        return result
     }
 
     /**
@@ -26,36 +25,45 @@ class BridgeGame {
      *
      * 재시작을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
-    fun retry(player: Player, bridge: Bridge) {
-        player.countRetry()
+    fun retry(command: Command, player: Player, bridge: Bridge) {
+        when (command.value) {
+            RETRY -> setRetry(player, bridge)
+            QUIT -> setQuit(player)
+        }
+    }
+
+    fun isSuccess(player: Player): String {
+        if (player.isGameSuccess) {
+            return GAME_SUCCESS
+        }
+        return GAME_FAILURE
+    }
+
+    private fun moveBridge(bridge: Bridge, direction: Direction, result: String) {
+        when (direction.command) {
+            UP -> moveUpBridge(bridge, result)
+            DOWN -> moveDownBridge(bridge, result)
+        }
+    }
+
+    private fun moveUpBridge(bridge: Bridge, result: String) {
+        bridge.setUpBridge(result)
+        bridge.setDownBridge(" ")
+    }
+
+    private fun moveDownBridge(bridge: Bridge, result: String) {
+        bridge.setUpBridge(" ")
+        bridge.setDownBridge(result)
+    }
+
+    private fun setRetry(player: Player, bridge: Bridge) {
+        player.setGameRetry()
+        player.setRetryCount()
         bridge.resetBridge()
     }
 
-    fun quit(player: Player) {
-        player.setQuit()
-    }
-
-    private fun setBridgeResult(playerDirection: String, result: String, bridge: Bridge) {
-        when (playerDirection) {
-            UP -> setUpBridge(result, bridge)
-            DOWN -> setDownBridge(result, bridge)
-        }
-    }
-
-    private fun setUpBridge(result: String, bridge: Bridge) {
-        bridge.up += setBridge(result, bridge)
-        bridge.down += setBridge(NOT_CROSS, bridge)
-    }
-
-    private fun setDownBridge(result: String, bridge: Bridge) {
-        bridge.down += setBridge(result, bridge)
-        bridge.up += setBridge(NOT_CROSS, bridge)
-    }
-
-    private fun setBridge(result: String, bridge: Bridge): String {
-        if (bridge.size == ZERO) {
-            return " ${result} "
-        }
-        return "| ${result} "
+    private fun setQuit(player: Player) {
+        player.setGameFailure()
+        player.setGameQuit()
     }
 }

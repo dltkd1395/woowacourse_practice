@@ -10,7 +10,7 @@ class FeatureTest {
     @ValueSource(strings = ["0", "4", "q", "R"])
     fun `기능 명령어를 잘못 입력한 경우 예외가 발생한다`(command: String) {
         assertThrows<IllegalArgumentException> {
-            Feature(command)
+            Feature.of(command)
         }
     }
 }

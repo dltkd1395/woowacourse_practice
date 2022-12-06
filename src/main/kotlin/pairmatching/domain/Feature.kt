@@ -2,17 +2,18 @@ package pairmatching.domain
 
 import pairmatching.utils.*
 
-class Feature(private val command: String) {
-    init {
-        require(isCommand()) { ErrorType.FEARTURE.errorMessage }
-    }
+enum class Feature(val command: String) {
+    PAIR_MATCHING("1"),
+    PAIR_INQUIY("2"),
+    PAIR_INITIALIZATION("3"),
+    QUIT("Q");
 
-    private fun isCommand(): Boolean =
-        when (command) {
-            PAIR_MATCHING_COMMAND -> true
-            PAIR_INQUIY_COMMAND -> true
-            PAIR_INITIALIZATION_COMMAND -> true
-            QUIT_COMMAND -> true
-            else -> false
+    companion object {
+        fun of(command: String): Feature {
+            return values()
+                .find { feature ->
+                    feature.command.equals(command)
+                } ?: throw IllegalArgumentException(ErrorType.FEARTURE.errorMessage)
         }
+    }
 }

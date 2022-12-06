@@ -2,3 +2,9 @@ package pairmatching.utils
 
 const val ERROR = "[ERROR] %s"
 const val ERROR_FEATURE_COMMAND = "올바른 기능을 입력해주세요."
+const val ERROR_NOT_FIND_COURCE = "존재하지 않는 과정입니다."
+const val ERROR_NOT_FIND_LEVEL = "존재하지 않는 레벨입니다."
+const val ERROR_NOT_FIND_MISSION = "존재하지 않는 미션입니다."
+const val ERROR_NOT_CONTAIN_MISSION = "레벨에 맞는 미션이 아닙니다."
+
+const val ERROR_INFORMATION_SIZE = "페어 정보는 3개여야 합니다."

@@ -49,3 +49,11 @@ const val FILE_BACKEND = "backend-crew.md"
 const val FILE_FRONTEND = "frontend-crew.md"
 
 const val OUTPUT_MATCHING_RESULT = "페어 매칭 결과입니다."
+
+const val YES = "네"
+const val NO = "아니오"
+
+const val INPUT_REMATCHING =
+    """
+매칭 정보가 있습니다. 다시 매칭하시겠습니까?
+네 | 아니오"""

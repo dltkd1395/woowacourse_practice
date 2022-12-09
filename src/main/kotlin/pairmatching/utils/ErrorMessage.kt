@@ -6,5 +6,6 @@ const val ERROR_NOT_FIND_COURCE = "존재하지 않는 과정입니다."
 const val ERROR_NOT_FIND_LEVEL = "존재하지 않는 레벨입니다."
 const val ERROR_NOT_FIND_MISSION = "존재하지 않는 미션입니다."
 const val ERROR_NOT_CONTAIN_MISSION = "레벨에 맞는 미션이 아닙니다."
-
+const val ERROR_NOT_FIND_FILE = "파일이 존재하지 않습니다."
 const val ERROR_INFORMATION_SIZE = "페어 정보는 3개여야 합니다."
+const val ERROR_FAIL_MATCHING = "매칭에 실패하였습니다."

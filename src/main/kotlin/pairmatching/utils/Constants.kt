@@ -47,3 +47,5 @@ const val DISTRIBUTION_MINSSION = "배포"
 const val PATH = "src/main/resource/"
 const val FILE_BACKEND = "backend-crew.md"
 const val FILE_FRONTEND = "frontend-crew.md"
+
+const val OUTPUT_MATCHING_RESULT = "페어 매칭 결과입니다."

@@ -16,12 +16,12 @@ class WoowaCourseService {
         return matching
     }
 
-    fun getPairMatch(woowaCourse: WoowaCourse): String {
+    fun getPairMatch(woowaCourse: WoowaCourse): Matching {
         val one = find(woowaCourse)
         if (one.size < 1) {
-            return ""
+            throw IllegalArgumentException()
         }
-        return one.toString()
+        return one.last().value
     }
 
     private fun find(woowaCourse: WoowaCourse) =

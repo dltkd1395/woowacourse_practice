@@ -6,9 +6,13 @@ import pairmatching.view.OutputView
 
 class PairInquiryController : Controller {
     override fun excute() {
-        val woowaCourse = WoowaCourse.from(InputController().getMatching())
-        val inquiry = WoowaCourseService().getPairMatch(woowaCourse)
-        OutputView.printMatching(inquiry)
+        try {
+            val woowaCourse = WoowaCourse.from(InputController().getMatching())
+            val inquiry = WoowaCourseService().getPairMatch(woowaCourse)
+            OutputView.printMatching(inquiry)
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            excute()
+        }
     }
-
 }

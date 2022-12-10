@@ -49,6 +49,7 @@ const val FILE_BACKEND = "backend-crew.md"
 const val FILE_FRONTEND = "frontend-crew.md"
 
 const val OUTPUT_MATCHING_RESULT = "페어 매칭 결과입니다."
+const val OUTPUT_INITIALIZAION = "초기화 되었습니다."
 
 const val YES = "네"
 const val NO = "아니오"

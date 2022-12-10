@@ -1,11 +1,9 @@
 package pairmatching.controller
 
 import pairmatching.domain.Feature
-import pairmatching.domain.Matching
 import pairmatching.domain.MatchingMenu
 import pairmatching.domain.ReMatching
 import pairmatching.view.InputView
-import java.awt.event.ItemListener
 
 class InputController {
     fun getFeature(): Feature {

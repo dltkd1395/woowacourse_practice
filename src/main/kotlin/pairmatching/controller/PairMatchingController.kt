@@ -11,11 +11,16 @@ class PairMatchingController: Controller {
     private val woowaCourseService = WoowaCourseService()
 
     override fun excute() {
-        val woowaCourse = WoowaCourse.from(InputController().getMatching())
-        if (isExists(woowaCourse) && !isReMatching()) {
-            return
+        try {
+            val woowaCourse = WoowaCourse.from(InputController().getMatching())
+            if (isExists(woowaCourse) && !isReMatching()) {
+                return
+            }
+            match(woowaCourse)
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            excute()
         }
-        match(woowaCourse)
     }
 
     private fun match(woowaCourse: WoowaCourse) {

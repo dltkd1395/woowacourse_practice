@@ -20,4 +20,7 @@ object InputView {
             })
         return products
     }
+
+    fun readInputAmount(): InputAmount =
+        InputAmount(Console.readLine())
 }

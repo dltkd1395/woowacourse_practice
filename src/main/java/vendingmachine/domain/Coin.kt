@@ -1,4 +1,4 @@
-package vendingmachine
+package vendingmachine.domain
 
 enum class Coin(private val amount: Int) {
     COIN_500(500),

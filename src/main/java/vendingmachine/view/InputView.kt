@@ -1,15 +1,14 @@
 package vendingmachine.view
 
 import camp.nextstep.edu.missionutils.Console
+import vendingmachine.domain.InputAmount
 import vendingmachine.domain.Product
 import vendingmachine.domain.Products
 import vendingmachine.domain.RetentionAmount
 
 object InputView {
-    fun readRetentionAmount(): RetentionAmount {
-        val amount = RetentionAmount(Console.readLine())
-        return amount
-    }
+    fun readRetentionAmount(): RetentionAmount =
+        RetentionAmount(Console.readLine())
 
     fun readProducts(): Products {
         val products = Products(Console.readLine()

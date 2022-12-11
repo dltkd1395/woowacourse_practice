@@ -29,4 +29,9 @@ object InputView {
         println(INPUT_INPUT_AMOUNT)
         return InputAmount(Console.readLine())
     }
+
+    fun readPurchaseProduct(): PurchaseProduct {
+        println(INPUT_PURCHASE_PRODUCT)
+        return PurchaseProduct(Console.readLine())
+    }
 }

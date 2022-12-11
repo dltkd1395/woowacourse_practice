@@ -1,16 +1,20 @@
 package vendingmachine.view
 
 import camp.nextstep.edu.missionutils.Console
-import vendingmachine.domain.InputAmount
-import vendingmachine.domain.Product
-import vendingmachine.domain.Products
-import vendingmachine.domain.RetentionAmount
+import vendingmachine.domain.*
+import vendingmachine.utils.INPUT_INPUT_AMOUNT
+import vendingmachine.utils.INPUT_PRODUCTS
+import vendingmachine.utils.INPUT_PURCHASE_PRODUCT
+import vendingmachine.utils.INPUT_RETENTION_AMOUNT
 
 object InputView {
-    fun readRetentionAmount(): RetentionAmount =
-        RetentionAmount(Console.readLine())
+    fun readRetentionAmount(): RetentionAmount {
+        println(INPUT_RETENTION_AMOUNT)
+        return RetentionAmount(Console.readLine())
+    }
 
     fun readProducts(): Products {
+        println(INPUT_PRODUCTS)
         val products = Products(Console.readLine()
             .split(";")
             .map { products -> products.substring(1, products.lastIndex) }
@@ -21,6 +25,8 @@ object InputView {
         return products
     }
 
-    fun readInputAmount(): InputAmount =
-        InputAmount(Console.readLine())
+    fun readInputAmount(): InputAmount {
+        println(INPUT_INPUT_AMOUNT)
+        return InputAmount(Console.readLine())
+    }
 }

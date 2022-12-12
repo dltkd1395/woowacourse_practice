@@ -7,7 +7,7 @@ import vendingmachine.domain.InputAmount
 
 class InputAmountTest {
     @ParameterizedTest
-    @ValueSource(strings = ["", "a", "@"])
+    @ValueSource(strings = ["", "a", "@", "-1"])
     fun `투입 금액을 잘못 입력한 경우 예외가 발생한다`(value: String) {
         assertThrows<IllegalArgumentException> {
             InputAmount(value)

@@ -9,3 +9,4 @@ const val ERROR_PRODUCT_QUANTITY = "상품 수량을 잘못 입력하였습니�
 const val ERROR_PRODUCT_NAME_LENGTH = "상품명은 1글자 이상이여야 합니다."
 const val ERROR_PRODUCT_CONTAIN = "존재하지 않는 상품입니다."
 const val ERROR_INPUT_AMOUNT = "투입 금액을 잘못 입력하였습니다."
+const val ERROR_POSITIVE_NUMBER = "양수여야 합니다."

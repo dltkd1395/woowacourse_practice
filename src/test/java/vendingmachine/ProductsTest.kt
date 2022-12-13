@@ -8,8 +8,9 @@ class ProductsTest {
     @Test
     fun `구입 상품이 포함되는 경우 예외가 발생한다`() {
         val products = listOf(Product(ProductName("콜라"), ProductPrice(1500), ProductQuantity(20)))
+        val amount = Amount(500)
         assertThrows<IllegalArgumentException> {
-            Products(products).containProduct("사이다")
+            Products(products).findPurchaseProduct("사이다", amount)
         }.printStackTrace()
     }
 }

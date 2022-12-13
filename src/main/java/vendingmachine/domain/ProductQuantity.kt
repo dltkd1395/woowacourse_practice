@@ -1,7 +1,6 @@
 package vendingmachine.domain
 
 import vendingmachine.utils.ErrorType
-import vendingmachine.utils.ONE
 import vendingmachine.utils.ZERO
 
 data class ProductQuantity(var value: Int) {

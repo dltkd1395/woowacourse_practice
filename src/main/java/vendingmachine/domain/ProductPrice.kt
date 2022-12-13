@@ -18,9 +18,6 @@ data class ProductPrice(val value: Int) {
         )
     )
 
-    fun payPrice(amount: Amount): Amount =
-        amount.useAmount(value)
-
     private fun isPriceRange(): Boolean =
         value >= PRODUCT_MIN_AMOUNT
 

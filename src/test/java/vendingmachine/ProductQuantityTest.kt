@@ -7,7 +7,7 @@ import vendingmachine.domain.ProductQuantity
 
 class ProductQuantityTest {
     @ParameterizedTest
-    @ValueSource(strings = ["a", "@", "-1"])
+    @ValueSource(strings = ["a", "@", "-1", ""])
     fun `상품 수량을 잘못 입력한 경우 예외가 발생한다`(value: String) {
         assertThrows<IllegalArgumentException> {
             ProductQuantity(value)

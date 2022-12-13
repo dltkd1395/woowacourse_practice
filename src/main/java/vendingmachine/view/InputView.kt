@@ -8,9 +8,9 @@ import vendingmachine.utils.INPUT_PURCHASE_PRODUCT
 import vendingmachine.utils.INPUT_RETENTION_AMOUNT
 
 object InputView {
-    fun readRetentionAmount(): RetentionAmount {
+    fun readRetentionAmount(): Amount {
         println(INPUT_RETENTION_AMOUNT)
-        return RetentionAmount(Console.readLine())
+        return Amount(Console.readLine())
     }
 
     fun readProducts(): Products {
@@ -25,9 +25,9 @@ object InputView {
         return products
     }
 
-    fun readInputAmount(): InputAmount {
+    fun readInputAmount(): Amount {
         println(INPUT_INPUT_AMOUNT)
-        return InputAmount(Console.readLine())
+        return Amount(Console.readLine())
     }
 
     fun readPurchaseProduct(): PurchaseProduct {

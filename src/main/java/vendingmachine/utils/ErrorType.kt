@@ -1,7 +1,6 @@
 package vendingmachine.utils
 
 enum class ErrorType(val errorMessage: String) {
-    RETENTION(ERROR.format(ERROR_RETENTION)),
     POSITIVE(ERROR.format(ERROR_POSITIVE_NUMBER)),
     PRODUCT_PRICE(ERROR.format(ERROR_PRODUCT_PRICE)),
     PRODUCT_PRICE_RANGE(ERROR.format(ERROR_PRODUCT_PRICE_RANGE)),
@@ -9,5 +8,5 @@ enum class ErrorType(val errorMessage: String) {
     PRODUCT_QUANTITY(ERROR.format(ERROR_PRODUCT_QUANTITY)),
     PRODUCT_NAME_LENGTH(ERROR.format(ERROR_PRODUCT_NAME_LENGTH)),
     PRODUCT_CONTAIN(ERROR.format(ERROR_PRODUCT_CONTAIN)),
-    INPUT_AMOUNT(ERROR.format(ERROR_INPUT_AMOUNT))
+    AMOUNT(ERROR.format(ERROR_AMOUNT))
 }

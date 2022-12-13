@@ -1,40 +1,59 @@
 package vendingmachine.domain
 
 import vendingmachine.utils.MIN_COIN
+import vendingmachine.utils.ONE
 import vendingmachine.utils.ZERO
 
-data class Coins(
-    var values: MutableMap<Int, Int> = Coin.toList().associate { coin -> coin to ZERO }
-        .toMutableMap()
-) {
+data class Coins(var values: MutableMap<Int, Int> = Coin.toMutableMap()) {
 
-    fun makeRandomCoins(numberGenerator: NumberGenerator, retentionAmount: RetentionAmount): Coins {
-        while (retentionAmount.value >= MIN_COIN) {
+    private lateinit var amount: Amount
+
+    fun makeRandomCoins(numberGenerator: NumberGenerator, amount: Amount): Coins {
+        this.amount = amount
+        while (this.amount.isUseAmount(MIN_COIN)) {
             val coin = numberGenerator.generate(coinAmounts)
-            removeCoinAmounts(retentionAmount, coin)
-            useCoinAmount(retentionAmount, coin)
+            removeCoinAmounts(coin)
+            useCoinAmount(coin)
         }
         return Coins(values)
     }
 
-    private fun removeCoinAmounts(retentionAmount: RetentionAmount, coin: Int) {
-        if (!isUseAmount(retentionAmount, coin)) {
+    fun makeChange(amount: Amount): Coins {
+        this.amount = amount
+        val coins = values.filter { coin -> coin.value > ZERO }
+        val initCoins = initCoins(coins)
+        for (coin in coins.keys) {
+            initCoins[coin] = exchange(coin)
+        }
+        return Coins(initCoins.filter { coin -> coin.value > ZERO }.toMutableMap())
+    }
+
+    private fun exchange(coin: Int): Int {
+        val count = this.amount.value.div(coin)
+        val coinNumber = values.get(coin) ?: ZERO
+        if (coinNumber <= count) {
+            this.amount = this.amount.useAmount(coin * coinNumber)
+            return values.get(coin) ?: ZERO
+        }
+        this.amount = this.amount.useAmount(coin * count)
+        return count
+    }
+
+    private fun initCoins(coins: Map<Int, Int>): MutableMap<Int, Int> =
+        coins.keys.associate { coin -> coin to ZERO }.toMutableMap()
+
+
+    private fun removeCoinAmounts(coin: Int) {
+        if (!this.amount.isUseAmount(coin)) {
             coinAmounts.remove(coin)
         }
     }
 
-    private fun useCoinAmount(retentionAmount: RetentionAmount, coin: Int) {
-        if (isUseAmount(retentionAmount, coin)) {
-            retentionAmount.minus(coin)
-            values.computeIfPresent(coin) { _, value -> value + 1 }
+    private fun useCoinAmount(coin: Int) {
+        if (this.amount.isUseAmount(coin)) {
+            this.amount = this.amount.useAmount(coin)
+            values.computeIfPresent(coin) { _, value -> value + ONE }
         }
-    }
-
-    private fun isUseAmount(retentionAmount: RetentionAmount, coin: Int): Boolean {
-        if (retentionAmount.value - coin >= ZERO) {
-            return true
-        }
-        return false
     }
 
     companion object {

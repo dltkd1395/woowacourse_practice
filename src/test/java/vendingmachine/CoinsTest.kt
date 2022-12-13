@@ -3,6 +3,8 @@ package vendingmachine
 import camp.nextstep.edu.missionutils.test.NsTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import vendingmachine.domain.Amount
+import vendingmachine.domain.Coins
 
 class CoinsTest : NsTest() {
     @Test
@@ -17,6 +19,14 @@ class CoinsTest : NsTest() {
                 "10원 - 0개"
             )
         }, 100, 100, 100, 100, 50)
+    }
+
+    @Test
+    fun `잔돈으로 돌려준다`() {
+        val actual = Coins(mutableMapOf(500 to 0, 100 to 4, 50 to 1, 10 to 0))
+            .makeChange(Amount(500))
+        val expected = Coins(mutableMapOf(100 to 4, 50 to 1))
+        assertThat(actual).isEqualTo(expected)
     }
 
     override fun runMain() {

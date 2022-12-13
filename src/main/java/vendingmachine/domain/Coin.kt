@@ -15,5 +15,8 @@ enum class Coin(private val amount: Int) {
 
         fun toList(): List<Int> =
             values().map(Coin::amount).toList()
+
+        fun toMutableMap(): MutableMap<Int, Int> =
+            values().associate { coin -> coin.amount to ZERO }.toMutableMap()
     }
 }

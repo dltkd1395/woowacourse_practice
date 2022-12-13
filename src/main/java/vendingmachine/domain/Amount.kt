@@ -14,9 +14,13 @@ data class Amount(val value: Int) {
         )
     )
 
-    fun buyProduct(amount: Int): Amount =
+    fun useAmount(amount: Int): Amount =
         Amount(value - amount)
 
+    fun isUseAmount(coin: Int): Boolean =
+        (value - coin) >= ZERO
+
     private fun isPositiveNumber(): Boolean =
-        value > ZERO
+        value >= ZERO
+
 }

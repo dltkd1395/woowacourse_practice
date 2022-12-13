@@ -61,10 +61,17 @@ class VendingMachineController {
         vendingMachine.puchaseProduct(purchaseProduct.name, inputAmount)
         println()
         return purchaseProduct
+
     }
 
     private fun buyProduct() {
-        val purchaseProduct = askPurchaseProduct(amount)
-        amount = amount.useAmount(purchaseProduct.findPrice(vendingMachine.products).value)
+        try {
+            val purchaseProduct = askPurchaseProduct(amount)
+            amount = amount.useAmount(purchaseProduct.findPrice(vendingMachine.products).value)
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            return buyProduct()
+        }
+
     }
 }

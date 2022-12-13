@@ -3,7 +3,7 @@ package vendingmachine.domain
 import vendingmachine.utils.ErrorType
 import vendingmachine.utils.ZERO
 
-data class Amount(val value: Int) {
+data class Amount(var value: Int) {
     init {
         require(isPositiveNumber()) { ErrorType.POSITIVE.errorMessage }
     }

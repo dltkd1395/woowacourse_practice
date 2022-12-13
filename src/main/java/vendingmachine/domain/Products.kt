@@ -4,16 +4,10 @@ import vendingmachine.utils.ErrorType
 
 data class Products(val products: List<Product>) {
 
-    fun containProduct(productName: String) {
-        if (products.filter { product -> product.productName.name == productName }.isEmpty()) {
-            throw IllegalArgumentException(ErrorType.PRODUCT_CONTAIN.errorMessage)
-        }
-    }
-
     fun findPurchaseProduct(name: String, amount: Amount): Product =
         products.filter { product -> product.isSameName(name) }
             .filter { product -> product.isPurchase(amount) }
-            .firstOrNull() ?: throw IllegalArgumentException()
+            .firstOrNull() ?: throw IllegalArgumentException(ErrorType.PRODUCT_CONTAIN.errorMessage)
 
     fun findProductPrice(name: String): ProductPrice =
         products.filter { product -> product.isSameName(name) }

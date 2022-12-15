@@ -1,6 +1,7 @@
 package subway.repository
 
 import subway.domain.Station
+import subway.utils.ErrorType
 import java.util.Collections
 
 
@@ -21,4 +22,9 @@ object StationRepository {
     fun deleteAll() {
         stations.clear()
     }
+
+    fun getStation(otherStation: Station): Station =
+        stations.filter { station ->
+            station == otherStation
+        }.firstOrNull() ?: throw IllegalArgumentException(ErrorType.CONTAINS_STATION.errorMessage)
 }

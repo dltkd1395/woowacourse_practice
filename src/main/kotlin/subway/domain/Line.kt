@@ -1,6 +1,6 @@
 package subway.domain
 
-class Line(private val name: String) {
+data class Line(private val name: String) {
 
     override fun toString(): String =
         this.name

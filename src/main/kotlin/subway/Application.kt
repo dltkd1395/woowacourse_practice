@@ -1,5 +1,13 @@
 package lotto
 
+import subway.controller.SubwayController
+
 fun main() {
-    TODO("프로그램 구현")
+    try {
+        SubwayController().run()
+    } catch (e: IllegalArgumentException) {
+        println(e.message)
+        println()
+        main()
+    }
 }

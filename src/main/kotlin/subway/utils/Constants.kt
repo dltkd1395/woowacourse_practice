@@ -40,3 +40,8 @@ const val INPUT_FEATURE = "## 원하는 기능을 선택하세요."
 
 const val INPUT_DEPARTURE_STATION = "## 출발역을 입력하세요."
 const val INPUT_ARRIVAL_STATION = "## 도착역을 입력하세요."
+
+const val OUTPUT_RESULT = "## 조회 결과"
+const val OUTPUT_INFO = "[INFO] %s"
+const val OUTPUT_TOTAL_DISTANCE = "총 거리: %dkm"
+const val OUTPUT_TOTAL_TIME = "총 소요 시간: %d분"

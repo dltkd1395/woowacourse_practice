@@ -21,3 +21,12 @@ val TIMES = listOf(
     listOf("강남역", "양재역", 8),
     listOf("양재역", "양재시민의숲역", 3)
 )
+
+
+const val INPUT_PATH_INQUIRY =
+"""## 메인 화면
+1. 경로 조회
+Q. 종료
+"""
+
+const val INPUT_FEATURE = "## 원하는 기능을 선택하세요."

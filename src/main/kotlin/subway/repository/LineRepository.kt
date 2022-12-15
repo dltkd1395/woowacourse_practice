@@ -15,7 +15,7 @@ object LineRepository {
 
     fun deleteLineByName(name: String): Boolean =
         lines.removeIf { line ->
-            line.name.equals(name)
+            line.toString() .equals(name)
         }
 
     fun deleteAll() {

@@ -15,7 +15,7 @@ object StationRepository {
 
     fun deleteStation(name: String?): Boolean =
         stations.removeIf { station ->
-            station.name.equals(name)
+            station.toString().equals(name)
         }
 
     fun deleteAll() {

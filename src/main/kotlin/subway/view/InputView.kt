@@ -3,9 +3,8 @@ package subway.view
 import camp.nextstep.edu.missionutils.Console
 import subway.domain.InquiryType
 import subway.domain.PathInquiry
-import subway.utils.INPUT_FEATURE
-import subway.utils.INPUT_INQUIRY_TYPE
-import subway.utils.INPUT_PATH_INQUIRY
+import subway.domain.Station
+import subway.utils.*
 
 object InputView {
 
@@ -19,5 +18,15 @@ object InputView {
         println(INPUT_INQUIRY_TYPE)
         println(INPUT_FEATURE)
         return InquiryType(Console.readLine())
+    }
+
+    fun readDepartureStation(): Station {
+        println(INPUT_DEPARTURE_STATION)
+        return Station(Console.readLine())
+    }
+
+    fun readArrivalStation(): Station {
+        println(INPUT_ARRIVAL_STATION)
+        return Station(Console.readLine())
     }
 }

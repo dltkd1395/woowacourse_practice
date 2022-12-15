@@ -29,4 +29,14 @@ const val INPUT_PATH_INQUIRY =
 Q. 종료
 """
 
+const val INPUT_INQUIRY_TYPE =
+"""## 경로 기준
+1. 최단 거리
+2. 최소 거리
+B. 돌아가기
+"""
+
 const val INPUT_FEATURE = "## 원하는 기능을 선택하세요."
+
+const val INPUT_DEPARTURE_STATION = "## 출발역을 입력하세요."
+const val INPUT_ARRIVAL_STATION = "## 도착역을 입력하세요."

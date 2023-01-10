@@ -1,0 +1,14 @@
+package bridge.utils
+
+import bridge.*
+
+enum class ErrorType(val errorMessage: String) {
+    RANGE(ERROR.format(ERROR_NUMBER_RANGE_MESSAGE)),
+    LENGTH(ERROR.format(ERROR_LENGTH_MESSAGE)),
+    NUMBER(ERROR.format(ERROR_NUMBER_MESSAGE)),
+    EMPTY(ERROR.format(ERROR_EMPTY_MESSAGE)),
+    LETTER(ERROR.format(ERROR_LETTER_MESSAGE)),
+    UPPER(ERROR.format(ERROR_UPPER_MESSAGE)),
+    DRIECTION(ERROR.format(ERROR_DRIECTION_MESSAGE)),
+    COMMAND(ERROR.format(ERROR_COMMAND_MESSAGE))
+}
